@@ -1,0 +1,859 @@
+@import url(source-sans/source-sans.css);
+
+/* Makes contenteditable work in Safari */
+[contenteditable] {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+*:focus {
+	outline: none;
+}
+
+/* Disable web browser highlighting */
+input,
+textarea,
+button,
+select,
+a, div {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Use this feature carefully, only apply on elements that dissapear or show flickering */
+.bottom-scroll-indicator, .window-body-header,  .face-container img, #write-feedback, #write-feedback .text-bubble, #write-feedback .ie-resume, #write-feedback .window-header, .window {
+    /*
+    All absolute-positioned elements inside a hardware-accelerated container (e.g. slides) must have rsAbsoluteEl class
+    http://help.dimsemenov.com/discussions/problems/858-weird-bug-in-chrome
+    */
+    backface-visibility: hidden;
+}
+
+.body-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #35a6f6;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    /* To avoid text selection */
+    user-select: none;
+/*    text-shadow: 2px 2px 8px rgba(121, 195, 247, .2);*/
+}
+
+.curtain {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    user-select: none;
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited {
+    color: inherit;
+}
+
+img, .menu-icon, .symbol2 {
+    -webkit-filter: drop-shadow(2px 2px 2px rgba(120, 195, 247, .2));
+    filter: drop-shadow(2px 2px 2px rgba(120, 195, 247, .2));
+}
+
+/* To hide the scrollbar on the boxes that have overflow:scroll enabled */
+::-webkit-scrollbar { 
+    display: none;
+}
+
+.white {
+	color: #fff;
+}
+
+.window {
+    background: #fff;
+    /*background: linear-gradient(rgb(248, 254, 255) 0%, rgb(248, 254, 255) 100%);*/
+    display: none;
+	position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+	top: 0;
+	left: 100%;
+	overflow: hidden;
+    /* We windows an initial transform of 0 to later do hardware accelerated animations using anime.js */
+    transform: translateX(0);
+}
+
+.window-header {
+	position: relative;
+    height: 6em;
+    z-index: 2;
+    /* overflow: hidden;
+    overflow can't be hidden for the icon to be visible*/
+}
+
+.home-icon {
+    width: 3em;
+    padding-top: 2.5em;
+    padding-left: 2.2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.window-title {
+	width: 9.5em;
+    position: absolute;
+    font-size: 1.3em;
+    font-weight: 400;
+    top: -.1em;
+    left: -10.3em;
+    color: #35a6f6;
+    text-align: right;
+    pointer-events: none;
+}
+
+.window-title-italic {
+	font-style: italic;
+	font-weight: 300;
+}
+
+/*Go home text button*/
+.window-home-title {
+    font-size: 1.3em;
+    font-weight: 400;
+    color: #35a6f6;
+    text-align: right;
+    padding-top: 2.5em;
+    padding-left: 5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+#home-window > .window-header > .window-home-title {
+    cursor: default;
+}
+
+#home-window > .window-header > .home-icon {
+    cursor: default;
+}
+
+.menuButton {
+	position: absolute;
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    max-width: 18vw;
+    border: none;
+    border-radius: 0.4em;
+    font-weight: 300;
+    background: none;
+    top: 0;
+    right: 0;
+    padding-top: 5.5em;
+    padding-right: 4em;
+    cursor: pointer;
+    margin-right: -.4em;
+}
+
+.menu-icon {
+    position: absolute;
+    width: 46%;
+    height: 27%; /* must be 60% of width */
+    background: url(images/menu-icon.svg);
+    background-repeat: no-repeat;
+    left: 0;
+    bottom: 0;
+    background-position-x: 100%;
+    transform: translate(0, -50%);
+}
+
+.window-body {
+	position: relative;
+    overflow: hidden;
+    height: 67%;
+}
+
+.window-body-header {
+	position: absolute;
+    width: 100%;
+    font-size: 1em;
+    top: 0;
+    height: auto;
+    text-align: center;
+    font-weight: 300;
+    background: #f8feff;
+    z-index: 1;
+}
+
+.window-body-content {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    font-weight: 300;
+    text-align: right;
+	z-index: 0;
+/*    width: 100vw;*/
+}
+
+.item-wrapper {
+	width: 100%;
+	height: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-wrapper .item:nth-child(1) {
+    margin-top: 2em;
+}
+
+.item-wrapper .option:nth-child(1) {
+    margin-top: 2em;
+}
+
+.window-footer {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    height: auto;
+    min-height: 4em;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.perma-items {
+	position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    text-align: left;
+}
+
+.perma-items .option {
+    padding-bottom: .7em;
+}
+
+body.hasHover .perma-items .option:hover, body.hasHover .item-wrapper .option:hover, .perma-items .option:active, .item-wrapper .option:active {
+    background: #bde9ff !important;    
+}
+
+.item {
+	display: block;
+    margin: 0;
+    width: auto;
+    max-width: 100%;
+    height: 1.1em;
+    margin-bottom: .7em;
+    /* We use margin-bottom instead of padding-bottom to hide the ie-symbol when it overflows because the text+symbol are too big*/
+    padding-right: 1.5em;
+/*    overflow: hidden;*/
+    font-size: 1.3em;
+    text-align: right;
+    pointer-events: all;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background .2s ease-out;
+}
+
+.filler {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.option {
+	display: block;
+    margin: 0;
+    width: auto;
+	max-width: 100%;
+    background: #fff;
+    /*background: #f8feff;*/
+    height: 1em;
+    padding-top: .5em;
+    padding-bottom: .6em;
+    padding-right: 1.5em;
+    overflow: hidden;
+    font-size: 1.3em;
+    text-align: right;
+    pointer-events: all;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background .2s ease-out;
+}
+
+.ie-symbol {
+    width: 1.1em;
+    margin-left: .5em;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
+
+.other-ie-symbols {
+    width: 1em;
+    margin-left: .1em;
+    margin-bottom: .1em;
+    vertical-align: text-bottom;
+}
+
+/* Help button next to some window titles*/
+/*<img src="images/questionmark.svg" alt="help">*/
+img[src="images/questionmark.svg"] {
+    width: 1em;
+    margin-right: .2em;
+    margin-bottom: .1em;
+    vertical-align: text-bottom;
+    cursor: pointer;   
+}
+
+.square-symbol {
+    display: inline-block;
+    width: .45em;
+    height: .43em;
+    vertical-align: middle;
+    background: #A1E0FF;
+    margin-left: 0.8em;
+    margin-right: 0.3em;
+    margin-bottom: .2em;
+}
+
+.symbol2 {
+    margin-top: -.15em;
+    width: 1.4em;
+    height: 1.4em;
+    margin-bottom: 0;
+    margin-right: -.25em;
+    margin-left: 0.5em;
+    background-repeat: no-repeat !important;
+}
+
+.symbol2.pen {
+    background: url(images/pen.svg);
+}
+
+.symbol2.share {
+    background: url(images/share.svg);
+}
+
+.symbol2.download {
+    background: url(images/download.svg);
+}
+
+.symbol2.erase {
+    background: url(images/erase.svg);
+}
+
+.symbol2.search {
+    background: url(images/search.svg);
+}
+
+.symbol2.close {
+    background: url(images/close.svg);
+}
+
+.symbol2.back {
+    background: url(images/back.svg);
+}
+
+.symbol2.hash {
+    background: url(images/hash.svg);
+}
+
+.symbol2.shortcut {
+    background: url(images/shortcut.svg);
+}
+
+.symbol2.date {
+    background: url(images/date.svg);
+}
+
+.symbol2.done {
+    background: url(images/done.svg);
+}
+
+.symbol2.delete {
+    background: url(images/delete.svg);
+}
+
+.plus-symbol {
+    display: inline-block;
+    width: .5em;
+    height: .5em;
+    vertical-align: middle;
+    margin-left: 0.9em;
+    margin-bottom: .1em;
+    margin-right: .3em;
+    filter: none;
+}
+
+#view-transactions .plus-symbol {
+    margin-left: 0.7em;
+    margin-right: 0.2em;
+}
+
+#welcome-window {
+    top: 100%;
+    left: 0;
+	text-align: center;
+	background: #A1E0FF;
+}
+
+.welcome-image {
+	margin-top: 3vh;
+    width: 40%;
+}
+
+.top-scroll-indicator {
+	position: absolute;
+    top: 2.6em; /* this assumes there is a title on top */
+    width: 100%;
+    height: 4em;
+    background: linear-gradient(rgba(255, 255, 255,1) 0% , rgba(255, 255, 255,0) 95%);
+    /*background: linear-gradient(rgba(248, 254, 255,1) 0% , rgba(248, 254, 255,0) 95%);*/
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bottom-scroll-indicator {
+	position: absolute;
+    width: 100%;
+    height: 2em;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255,0) 5% , rgba(255, 255, 255,1) 100%);
+    /*background: linear-gradient(rgba(248, 254, 255,0) 5% , rgba(248, 254, 255,1) 100%);*/
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+    z-index: 1;
+}
+
+.text-bubble {
+    position: absolute;
+    bottom: 0;
+    border: 1px solid rgba(92, 182, 246, .5);
+    box-shadow: 0 0 10px rgba(92, 182, 246, .2);
+    border-bottom: none;
+    border-radius: 1em 1em 0 0;
+    width: 66%;
+    height: auto;
+    padding: 1em;
+    font-weight: 300;
+    font-size: 1.5em;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-right: 3em;
+    background: #fff;
+    pointer-events: all;
+}
+.text-bubble div[contenteditable] {
+    height: auto;
+    min-height: 2.5em;
+}
+
+.cross {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: .8em;
+    width: 1em;
+    cursor: pointer;
+}
+
+.check {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: .8em;
+    width: 1em;
+    cursor: pointer;
+}
+
+#num-pad {
+    position: absolute;
+    /* height is defined by javascript */
+    width: 100%;
+    bottom: 0;
+    background: #9ddeff;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#num-pad table {
+    position: absolute;
+    width: 100%;
+    max-width: 27em;
+    text-align: center;
+    color: #fff;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+/*    background: #9ddeff;*/
+}
+
+#num-pad table td {
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background .2s ease-out;
+}
+
+body.hasHover #num-pad table td:hover, #num-pad table td:active {
+    background: #bee9ff;
+}
+
+.inactiveCell {
+    width: 2%;
+}
+
+/* Column with decimal shortcuts */
+#num-pad table tr td:nth-child(2) {
+    font-size: 1.3em;
+    width: 13.5%;
+    height: 2em;
+}
+/* Column with action buttons */
+#num-pad table tr td:nth-child(6) {
+    font-size: 1.3em;
+    width: 13.5%;
+    height: 2em;
+}
+
+#num-pad table tr td:nth-child(3) {
+    font-size: 2.2em;
+    width: 23%;
+    height: 2em;
+}
+
+#num-pad table tr td:nth-child(4) {
+    font-size: 2.2em;
+    width: 23%;
+    height: 2em;
+}
+
+#num-pad table tr td:nth-child(5) {
+    font-size: 2.2em;
+    width: 23%;
+    height: 2em;
+}
+
+/* Amount display */
+#num-pad table tr:nth-child(1) td {
+    font-size: 3em;
+    cursor: default;
+}
+
+/* Disables hover on the cell that displays the amount and on inactive cells that have no function */
+body.hasHover #num-pad table tr:nth-child(1) td:hover, #num-pad table tr:nth-child(1) td:active, body.hasHover .inactiveCell:hover, .inactiveCell:active {
+    background: #9ddeff !important;
+}
+
+#num-pad img[alt=delete], #num-pad img[alt=cancel], #num-pad img[alt=next]{
+    width: 1em;
+}
+
+/* Expense or income added big symbol */
+.ei-added {
+    display: inline-block;
+    width: 6em;
+    text-align: center;
+    background: #fff;
+    border-radius: 50%;
+    filter: none;
+}
+
+/*  Small expense or income added symbol
+    (situational) */
+.small-ei-added {
+    display: none;
+}
+
+.ei-added-title {
+    margin-top: .5em;
+    margin-bottom: 0.6em;
+}
+
+h1 {
+	text-align: center; 
+}
+
+p {
+	font-size: 1.2em;
+	text-align: center;
+}
+
+/* Date picker color modifications */
+
+.datepicker {
+    color: #a1e0ff;
+    background: transparent;
+    text-shadow: none;
+}
+
+.datepicker--nav-title i {
+    color: #a1e0ff;
+}
+
+.datepicker--nav-action path {
+    stroke: #a1e0ff;
+}
+
+.datepicker--day-name {
+    color: #79c3f7;
+}
+
+.datepicker--cell-day, .datepicker--nav-title, .datepicker--nav-action, .datepicker--cell-year, .datepicker--cell-month {
+    transition: background .2s ease-out;
+}
+
+.datepicker--cell-day.-other-month-, .datepicker--cell-year.-other-decade- {
+    color: #d7f6ff;
+}
+
+.datepicker--cell.-focus-, .datepicker--cell.-disabled-.-focus-{
+    background: #d1f0ff;
+    color: #fff;
+}
+
+.datepicker--cell.-selected-, .datepicker--cell.-selected-, .datepicker--cell.-selected-, .datepicker--cell.-selected-.-current-, .datepicker--cell-day.-other-month-:active, .datepicker--cell-year.-other-decade-:active, body.hasHover .datepicker--cell-day.-other-month-:hover, body.hasHover .datepicker--cell-year.-other-decade-:hover, .datepicker--cell.-selected-.-focus- {
+    background: #b2e6ff;
+    color: #fff;
+}
+
+.datepicker--cell.-current-.-focus- {
+    color: #fff;
+}
+
+body.hasHover .datepicker--nav-action:hover, body.hasHover .datepicker--nav-title:hover, .datepicker--nav-action:active, .datepicker--nav-title:active {
+    background: #f1faff;
+}
+
+.datepicker-here {
+    display: inline-block;
+    margin-top: 1em;
+    zoom: 1.4;
+}
+
+.datepicker-inline .datepicker {
+    border: none;
+}
+
+.datepicker--nav {
+    border-bottom: 0;
+}
+
+.datepicker--cell.-disabled- {
+    color: #d7f6ff;
+}
+
+
+.ie-resume {
+    font-size: 1.4em;
+    text-align:left;
+    font-weight: 300;
+    display: inline-block;
+    line-height: 1.4em;
+    margin-top: 0;
+    user-select: text;
+}
+
+#write-feedback .ie-resume{
+    transition: opacity 0.3s ease-out;
+}
+
+.qr-code {
+    width: 10em;
+    margin-top: 2em;
+    padding: 1em;
+    background: #fff;
+}
+
+.site-url {
+    font-size: 1.4em;
+    font-weight: 400;
+}
+
+.face-container {
+    display: block;
+}
+
+.face-container img {
+    cursor: pointer;
+    opacity: 0.6;
+    display: inline-block;
+    width: 3.5em;
+    max-width: 14vw;
+    margin: 0 .25em;
+    transition: opacity .5s ease-out;
+}
+
+body.hasHover .face-container img:hover {
+    opacity: 1 !important;
+}
+
+#menu {
+    top: -100%;
+    left: 0;
+}
+
+/* View button when a description exists */
+.ie-added-desc b {
+    cursor: pointer;
+}
+
+/* CSS for post menu windows (windows where you don't want users to open the menu from) */
+.post-menu {
+    pointer-events: none;
+    padding-right: 0;
+    width: 1.2em ;
+    margin-right: 0;
+}
+
+.post-menu .menu-icon {
+    background: none;
+    width: 0;
+}
+
+/*Survey window*/
+
+#survey > .window-header {
+    height: 15%;
+}
+
+#survey > .window-body {
+    height: 85%;
+}
+
+/* for iPhone 5 and SE */
+@media only screen
+    and (max-height : 666px) {
+
+        #home-window .window-body {
+            height: 69% !important;
+            /* height: 71% !important;*/
+        }
+
+        .welcome-image {
+            margin-top: 2.5vh;
+            width: 35%;
+        }        
+
+        /*Show a smaller expense icon when the height of the display is too small (666px or under)*/
+        .ei-added {
+            display: none;
+        }
+
+        .small-ei-added {
+            display: inline-block;
+        }
+
+        /* Giving more space to the added expense/income resume text when the height of the window is small*/
+        .ei-added-title {
+            margin-top: 0;
+        }
+
+        /* shrinks the datepicker when screen height is >667 */
+        .datepicker-here {
+            zoom: 1.1;
+            margin-top: 0.9em;
+        }
+
+        /*shrinks the space the qr code and website occupy in the share window*/
+        .qr-code {
+            width: 7em;
+            margin-top: 0;
+        }
+
+        .site-url {
+            font-size: 1em;
+            font-weight: 400;
+            margin-top: 0.5em;
+        }
+    }
+
+@media only screen
+    and (max-height : 565px) {
+
+        #num-pad {
+            font-size: 15px;
+        }
+    }
+
+@media only screen
+    and (max-height : 438px) {
+
+        #num-pad {
+            font-size: 14px;
+        }
+    }
+
+@media only screen
+    and (max-height : 730px) {
+        #home-window .window-body {
+            height: 72% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 600px) {
+        #home-window .window-body {
+            height: 67% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 709px) {
+        #ie-choose-amount .window-body {
+            height: 68% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 654px) {
+        #ie-choose-amount .window-body {
+            height: 66% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 562px) {
+        #ie-choose-amount .window-body {
+            height: 62% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 480px) {
+        #ie-choose-amount .window-body {
+            height: 60% !important;
+        }
+}
+
+@media only screen
+    and (max-height : 759px) {
+        #add-desc .ie-resume {
+            display: none;
+        }
+}
+
+/* For screens that are bigger than 733px */
+@media only screen
+    and (min-height: 733px) {
+        #home-window .perma-items div:nth-child(2) {
+            margin-bottom: 1em;
+        }
+}

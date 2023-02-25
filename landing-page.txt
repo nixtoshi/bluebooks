@@ -1,0 +1,15 @@
+Books App
+
+The most simple finance tracker yet
+
+A more mindful financial life starts here
+
+// Testimonials
+
+This is the best solution for tracking financial transactions using manual input that I've found so far
+
+1 or 2 taps, and the expense is added. By far the fastest expense I've ever added
+
+It gets better the more you use it, it starts learning what transactions you do the most and adapts to offer you a better experience
+
+Simple and beautiful
