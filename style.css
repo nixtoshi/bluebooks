@@ -408,7 +408,10 @@ img[src="images/questionmark.svg"] {
     top: 100%;
     left: 0;
 	text-align: center;
-	background: #A1E0FF;
+    background: linear-gradient(
+        rgb(161, 224, 255),
+        rgb(161, 224, 255)
+    );
 }
 
 .welcome-image {
